@@ -22,6 +22,45 @@ Repository: <repo-path>
 Acceptance: <tests, behavior, docs, or report expected>
 ```
 
+## Give this repo to a bot
+
+If you are talking to a repository bot, Codex, OMX, or another coding agent, you can paste this request and let it handle the integration:
+
+```text
+Repository: https://github.com/devswha/hermes-omx-bridge-skill
+
+Please integrate Hermes Agent with oh-my-codex (OMX) using this repository.
+
+Do the following:
+1. Clone or inspect the repository.
+2. Read `README.md`, `helpers/codex-omx-hermes-integration.md`, and `skills/hermes-omx-bridge/SKILL.md`.
+3. Check that `hermes`, `omx`, and `git` are available. If GitHub access is needed, check `gh auth status`.
+4. Add the Hermes skill tap if needed:
+   `hermes skills tap add devswha/hermes-omx-bridge-skill`
+5. Inspect and install the skill:
+   `hermes skills inspect devswha/hermes-omx-bridge-skill/skills/hermes-omx-bridge`
+   `hermes skills install devswha/hermes-omx-bridge-skill/skills/hermes-omx-bridge`
+6. Run the repo helper if available:
+   `scripts/verify-hermes-omx-bridge.sh --install --omx-smoke`
+7. Report the installed skill status, OMX smoke-test result, any blockers, and the exact user request I should send to my chosen Hermes bot/profile.
+
+Safety:
+- Do not publish, force-push, or modify production repositories unless explicitly asked.
+- Do not print or paste secrets.
+- Preserve existing local changes.
+```
+
+After setup, ask your chosen Hermes bot/profile something like:
+
+```text
+Use OMX for this repository task.
+Repository: <repo-path>
+Task: <goal>
+Acceptance: <tests, lint, behavior, docs, or report expected>
+Constraints: preserve existing work, avoid unrelated rewrites, no external publish unless asked.
+Report back with changed files, verification evidence, and remaining risks.
+```
+
 ## Repository layout
 
 ```text
@@ -38,12 +77,10 @@ This layout is compatible with Hermes custom GitHub taps, whose default tap path
 
 ## Install from a custom tap
 
-After this repository is pushed to GitHub:
-
 ```bash
-hermes skills tap add <owner>/<repo>
+hermes skills tap add devswha/hermes-omx-bridge-skill
 hermes skills search hermes-omx-bridge
-hermes skills install <owner>/<repo>/skills/hermes-omx-bridge
+hermes skills install devswha/hermes-omx-bridge-skill/skills/hermes-omx-bridge
 ```
 
 ## Publish to a hub repository
