@@ -1,5 +1,7 @@
 # Hermes OMX Bridge Skill
 
+[English](README.md) | [한국어](README.ko.md)
+
 A Hermes Agent skill that teaches Hermes bots/profiles how to delegate coding, repository analysis, test/fix loops, and parallel execution to [oh-my-codex](https://github.com/devswha/oh-my-codex) via `omx`.
 
 ## What it does
@@ -62,44 +64,9 @@ Report back with changed files, verification evidence, and remaining risks.
 ```
 
 
-## 한국어 빠른 시작
+## Korean guide
 
-Hermes에게 아래처럼 말하면 됩니다:
-
-```text
-이 레포를 사용해서 Hermes와 OMX 연동을 설치하고 검증해줘:
-https://github.com/devswha/hermes-omx-bridge-skill
-
-README의 "Give this repo to a bot" 절차를 따라줘.
-설치 후에는 어떤 진행 모드로 할지 나에게 먼저 물어봐.
-선택지는 최소한 다음을 포함해줘:
-1. 조회만 하기: omx explore
-2. 일반 구현/수정: omx exec
-3. 완료될 때까지 반복: omx ralph
-4. 병렬 작업: omx team
-5. 테스트/수정 반복: omx exec 또는 omx ralph 기반 QA loop
-
-각 모드의 장단점과 추천 모드를 짧게 설명하고, 내가 선택하면 그때 실행해.
-```
-
-설치가 끝난 뒤 원하는 Hermes 봇/프로필에게는 이렇게 요청하세요:
-
-```text
-OMX를 사용해서 이 저장소 작업을 진행해줘.
-Repository: <repo-path>
-Task: <목표>
-Acceptance: <테스트, 린트, 동작, 문서 등 완료 기준>
-Constraints: 기존 작업 보존, 관련 없는 재작성 금지, 요청 없는 외부 publish 금지.
-
-먼저 어떤 모드로 진행할지 물어봐:
-- explore: 읽기 전용 조사
-- exec: 일반 구현/수정
-- ralph: 완료까지 반복
-- team: 독립 작업 병렬 처리
-- QA loop: 테스트/수정 반복
-
-내가 모드를 선택한 뒤 실행하고, 변경 파일/검증 결과/남은 리스크를 보고해줘.
-```
+한국어 안내는 [README.ko.md](README.ko.md)를 보세요.
 
 ## Repository layout
 
