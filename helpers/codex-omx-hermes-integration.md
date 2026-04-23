@@ -25,7 +25,7 @@ Please do the following:
 6. Run a small disposable OMX smoke test:
    - create a temporary git repo
    - run `omx explore --prompt "Confirm README.md exists; do not edit files."`
-   - optionally run `omx exec --high --full-auto` to create one harmless file and verify its content
+   - optionally run `omx exec --high --full-auto` only inside that disposable repo to create one harmless file and verify its content
 7. Tell me exactly how to ask my chosen Hermes bot/profile to use OMX.
 
 Safety constraints:

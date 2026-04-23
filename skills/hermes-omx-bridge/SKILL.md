@@ -105,11 +105,11 @@ terminal(command="cat /tmp/omx-result.txt && git status --short", workdir="/path
 
 ### Fully unattended trusted-local execution
 
-Only use approval-bypassing flags when the user or repo policy explicitly allows local autonomous execution.
+Prefer sandboxed automation for unattended local work. Only consider approval-bypass modes when the user explicitly requests them and the repository is externally sandboxed.
 
 ```text
 terminal(
-  command="omx exec --madmax --high -o /tmp/omx-result.txt 'Task: ... Acceptance: ...'",
+  command="omx exec --high --full-auto -o /tmp/omx-result.txt 'Task: ... Acceptance: ...'",
   workdir="/path/to/repo",
   timeout=1800
 )
@@ -177,7 +177,7 @@ Before publishing this skill:
 
 1. Test on a disposable repository with one read-only `omx explore` task and one small `omx exec` task.
 2. Confirm examples use placeholders such as `<repo-path>` instead of private machine paths.
-3. Keep default examples safe; document `--madmax` as trusted-local only.
+3. Keep default examples safe; avoid approval-bypass flags unless the user explicitly requests them and the environment is externally sandboxed.
 4. Publish from the skill folder if Hermes supports registry publishing:
 
 ```bash

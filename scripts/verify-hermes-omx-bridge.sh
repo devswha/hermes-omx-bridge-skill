@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+ADD_TAP=0
 INSTALL=0
 RUN_OMX_SMOKE=0
 SKILL_ID="devswha/hermes-omx-bridge-skill/skills/hermes-omx-bridge"
@@ -8,19 +9,21 @@ TAP_REPO="devswha/hermes-omx-bridge-skill"
 
 usage() {
   cat <<USAGE
-Usage: $0 [--install] [--omx-smoke]
+Usage: $0 [--tap] [--install] [--omx-smoke]
 
 Checks Hermes ↔ OMX bridge prerequisites and skill discovery.
 
 Options:
-  --install     Install the Hermes skill if inspection succeeds.
+  --tap         Add the public Hermes skill tap before inspection.
+  --install     Install the Hermes skill if inspection succeeds. Implies --tap.
   --omx-smoke   Run a disposable omx explore smoke test.
 USAGE
 }
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
-    --install) INSTALL=1 ;;
+    --tap) ADD_TAP=1 ;;
+    --install) ADD_TAP=1; INSTALL=1 ;;
     --omx-smoke) RUN_OMX_SMOKE=1 ;;
     -h|--help) usage; exit 0 ;;
     *) echo "Unknown argument: $1" >&2; usage >&2; exit 2 ;;
@@ -48,13 +51,17 @@ else
   echo 'warn: gh not installed; public GitHub skill fetch may still work through Hermes'
 fi
 
-echo '--- tap registration ---'
-hermes skills tap add "$TAP_REPO" || true
-hermes skills tap list || true
+if [[ "$ADD_TAP" -eq 1 ]]; then
+  echo '--- tap registration ---'
+  hermes skills tap add "$TAP_REPO" || true
+  hermes skills tap list || true
+fi
 
 echo '--- skill inspect ---'
-hermes skills inspect "$SKILL_ID" >/tmp/hermes-omx-bridge-inspect.txt
-sed -n '1,80p' /tmp/hermes-omx-bridge-inspect.txt
+inspect_file="$(mktemp /tmp/hermes-omx-bridge-inspect.XXXXXX)"
+trap 'rm -f "$inspect_file"' EXIT
+hermes skills inspect "$SKILL_ID" >"$inspect_file"
+sed -n '1,80p' "$inspect_file"
 
 if [[ "$INSTALL" -eq 1 ]]; then
   echo '--- skill install ---'
