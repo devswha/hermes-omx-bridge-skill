@@ -1,6 +1,6 @@
 # Hermes OMX Bridge Skill
 
-[English](README.md) | [한국어](README.ko.md)
+[English](README.md) | [Korean](README.ko.md)
 
 A Hermes Agent skill that teaches Hermes bots/profiles how to delegate coding, repository analysis, test/fix loops, and parallel execution to [oh-my-codex](https://github.com/devswha/oh-my-codex) via `omx`.
 
@@ -63,10 +63,6 @@ Constraints: preserve existing work, avoid unrelated rewrites, no external publi
 Report back with changed files, verification evidence, and remaining risks.
 ```
 
-
-## Korean guide
-
-한국어 안내는 [README.ko.md](README.ko.md)를 보세요.
 
 ## Repository layout
 
