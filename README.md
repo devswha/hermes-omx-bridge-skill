@@ -1,18 +1,26 @@
 # Hermes OMX Bridge Skill
 
-A Hermes Agent skill that teaches Hermes profiles how to delegate coding, repository analysis, test/fix loops, and parallel execution to [oh-my-codex](https://github.com/devswha/oh-my-codex) via `omx`.
+A Hermes Agent skill that teaches Hermes bots/profiles how to delegate coding, repository analysis, test/fix loops, and parallel execution to [oh-my-codex](https://github.com/devswha/oh-my-codex) via `omx`.
 
 ## What it does
 
-This skill makes Hermes act as the orchestration layer while `omx` handles code execution:
+This skill lets a user ask a chosen Hermes bot/profile to use OMX. Hermes remains the conversational orchestration layer while `omx` handles code execution:
 
 - `omx explore` for read-only repo lookup
 - `omx exec` for implementation, debugging, refactoring, and tests
 - `omx ralph` for persistent acceptance-criteria loops
 - `omx team` for independent parallel execution lanes
-- `omx ultraqa` for QA/test/fix cycles
+- explicit `omx exec` or `omx ralph` prompts for QA/test/fix cycles
 
 The skill emphasizes scoped prompts, local repo instructions, verification after OMX returns, and safe reporting back to the user.
+
+Typical user request:
+
+```text
+Ask <bot-or-profile-name> to use OMX for <goal>.
+Repository: <repo-path>
+Acceptance: <tests, behavior, docs, or report expected>
+```
 
 ## Repository layout
 
@@ -56,3 +64,11 @@ assert 'description' in data
 print('ok')
 PY
 ```
+
+To check that the skill is publish-safe before supplying a destination repo:
+
+```bash
+hermes skills publish "$PWD/skills/hermes-omx-bridge" --to github
+```
+
+Expected result: the scan completes without a dangerous verdict, then Hermes asks for `--repo`.
