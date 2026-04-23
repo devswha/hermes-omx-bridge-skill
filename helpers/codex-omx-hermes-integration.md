@@ -27,6 +27,13 @@ Please do the following:
    - run `omx explore --prompt "Confirm README.md exists; do not edit files."`
    - optionally run `omx exec --high --full-auto` only inside that disposable repo to create one harmless file and verify its content
 7. Tell me exactly how to ask my chosen Hermes bot/profile to use OMX.
+8. After setup, ask me which execution mode I want before running real repository work:
+   - `explore` for read-only investigation
+   - `exec` for normal implementation/fixes
+   - `ralph` to keep iterating until completion
+   - `team` for independent parallel lanes
+   - `QA loop` for repeated test/fix cycles with `omx exec` or `omx ralph`
+   Recommend one mode briefly, but wait for my choice before executing non-trivial repo changes.
 
 Safety constraints:
 - Do not publish, force-push, or modify production repositories unless I explicitly ask.
@@ -40,6 +47,7 @@ Report back with:
 - Commands run
 - Any blockers
 - A copy-paste user request I can send to a Hermes bot/profile
+- A short mode-selection question I should answer before execution
 ```
 
 ## Minimal request to a Hermes bot/profile after setup
@@ -51,4 +59,17 @@ Task: <goal>
 Acceptance: <tests, lint, behavior, docs, or report expected>
 Constraints: preserve existing work, avoid unrelated rewrites, no external publish unless asked.
 Report back with changed files, verification evidence, and remaining risks.
+```
+
+Before executing, the bot/profile should ask:
+
+```text
+Which OMX mode should I use?
+1. explore — read-only investigation
+2. exec — normal implementation/fix
+3. ralph — iterate until complete
+4. team — parallel independent lanes
+5. QA loop — repeated test/fix cycle
+
+Recommended: <mode> because <short reason>.
 ```

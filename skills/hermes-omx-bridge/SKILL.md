@@ -60,6 +60,21 @@ Prefer `omx exec` unless another mode is clearly better.
 
 For planning-first or repeated QA/test/fix work, prefer an explicit `omx exec --high` or `omx ralph` prompt that asks OMX to plan first or run a test/fix loop. Only use additional OMX workflow names when the local `omx --help` output confirms they are available as direct CLI commands.
 
+After installing or loading this skill, and before launching non-trivial repository changes, Hermes should ask the user which mode to use when the request does not already make it obvious:
+
+```text
+Which OMX mode should I use?
+1. explore — read-only investigation
+2. exec — normal implementation/fix
+3. ralph — iterate until complete
+4. team — parallel independent lanes
+5. QA loop — repeated test/fix cycle
+
+Recommended: <mode> because <short reason>.
+```
+
+If the user's requested mode is unsafe for the task shape, explain the risk and recommend the safer mode before proceeding.
+
 ## Prompt Contract
 
 Before launching OMX, write a prompt that includes:
