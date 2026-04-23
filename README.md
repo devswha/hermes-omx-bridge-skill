@@ -25,6 +25,10 @@ Acceptance: <tests, behavior, docs, or report expected>
 ## Repository layout
 
 ```text
+helpers/
+└── codex-omx-hermes-integration.md
+scripts/
+└── verify-hermes-omx-bridge.sh
 skills/
 └── hermes-omx-bridge/
     └── SKILL.md
@@ -72,3 +76,23 @@ hermes skills publish "$PWD/skills/hermes-omx-bridge" --to github
 ```
 
 Expected result: the scan completes without a dangerous verdict, then Hermes asks for `--repo`.
+
+## Ask Codex or OMX to set it up
+
+If you want Codex/OMX to help wire this into Hermes, paste the prompt in:
+
+```text
+helpers/codex-omx-hermes-integration.md
+```
+
+For a local check from this repository:
+
+```bash
+scripts/verify-hermes-omx-bridge.sh
+```
+
+To install the Hermes skill and run a disposable OMX smoke test:
+
+```bash
+scripts/verify-hermes-omx-bridge.sh --install --omx-smoke
+```
