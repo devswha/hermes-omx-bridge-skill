@@ -1,0 +1,58 @@
+# Hermes OMX Bridge Skill
+
+A Hermes Agent skill that teaches Hermes profiles how to delegate coding, repository analysis, test/fix loops, and parallel execution to [oh-my-codex](https://github.com/devswha/oh-my-codex) via `omx`.
+
+## What it does
+
+This skill makes Hermes act as the orchestration layer while `omx` handles code execution:
+
+- `omx explore` for read-only repo lookup
+- `omx exec` for implementation, debugging, refactoring, and tests
+- `omx ralph` for persistent acceptance-criteria loops
+- `omx team` for independent parallel execution lanes
+- `omx ultraqa` for QA/test/fix cycles
+
+The skill emphasizes scoped prompts, local repo instructions, verification after OMX returns, and safe reporting back to the user.
+
+## Repository layout
+
+```text
+skills/
+└── hermes-omx-bridge/
+    └── SKILL.md
+```
+
+This layout is compatible with Hermes custom GitHub taps, whose default tap path is `skills/`.
+
+## Install from a custom tap
+
+After this repository is pushed to GitHub:
+
+```bash
+hermes skills tap add <owner>/<repo>
+hermes skills search hermes-omx-bridge
+hermes skills install <owner>/<repo>/skills/hermes-omx-bridge
+```
+
+## Publish to a hub repository
+
+To submit the skill to a hub repository via Hermes:
+
+```bash
+hermes skills publish /absolute/path/to/skills/hermes-omx-bridge --to github --repo <owner>/<hub-repo>
+```
+
+## Local validation
+
+```bash
+python3 - <<'PY'
+from pathlib import Path
+import yaml
+p = Path('skills/hermes-omx-bridge/SKILL.md')
+front = p.read_text().split('---', 2)[1]
+data = yaml.safe_load(front)
+assert data['name'] == 'hermes-omx-bridge'
+assert 'description' in data
+print('ok')
+PY
+```
